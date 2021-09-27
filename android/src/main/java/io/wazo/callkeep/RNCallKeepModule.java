@@ -707,8 +707,10 @@ public class RNCallKeepModule extends ReactContextBaseJavaModule {
         Log.d(TAG, "[VoiceConnection] backToForeground, app isOpened ?" + (isOpened ? "true" : "false"));
 
         if (isOpened) {
-            focusIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            focusIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT  +  WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
             activity.startActivity(focusIntent);
+            activity.setShowWhenLocked(true);
+            activity.setTurnScreenOn(true);
         } else {
             focusIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK +
                     WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED +
